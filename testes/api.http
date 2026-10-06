@@ -1,0 +1,16 @@
+@baseUrl = http://localhost:8080/joao2info/catalogo_filmes/api
+
+### Todos os filmes
+GET {{baseUrl}}/filmes.php
+### Filme 1
+GET {{baseUrl}}/filmes.php?id=1
+### Filme 2
+GET {{baseUrl}}/filmes.php?id=2
+### Filme 3
+GET {{baseUrl}}/filmes.php?id=3
+### Filme 4
+GET {{baseUrl}}/filmes.php?id=4
+### Filme 5
+GET {{baseUrl}}/filmes.php?id=5
+### Filme nao encontrado
+GET {{baseUrl}}/filmes.php?id=99

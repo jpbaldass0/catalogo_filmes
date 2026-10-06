@@ -21,3 +21,12 @@ if ($id === null) {
 $stmt = $conexao->prepare(
  "SELECT * FROM filmes WHERE id = ?"
 );
+
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$resultado = $stmt->get_result();
+$filme = $resultado->fetch_assoc();
+echo json_encode(
+ $filme,
+ JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
+);
