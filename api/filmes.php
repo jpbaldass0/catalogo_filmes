@@ -17,7 +17,7 @@ if ($id === null) {
  );
  exit;
 }
-// Se um id foi informado, consulta somente esse filme
+
 $stmt = $conexao->prepare(
  "SELECT * FROM filmes WHERE id = ?"
 );
