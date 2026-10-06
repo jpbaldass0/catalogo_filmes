@@ -1,17 +1,23 @@
 <?php
 header("Content-Type: application/json; charset=utf-8");
-// Inclui o arquivo responsável pela conexão com o banco
 require_once "../config/conexao.php";
-// Consulta todos os filmes cadastrados
-$sql = "SELECT * FROM filmes";
-$resultado = $conexao->query($sql);
-$filmes = [];
-// Converte cada registro do banco em um array associativo
-while ($filme = $resultado->fetch_assoc()) {
+// Recupera o id informado pela URL, se existir
+$id = $_GET["id"] ?? null;
+// Se nenhum id foi informado, retorna todos os filmes
+if ($id === null) {
+ $sql = "SELECT * FROM filmes";
+ $resultado = $conexao->query($sql);
+ $filmes = [];
+ while ($filme = $resultado->fetch_assoc()) {
  $filmes[] = $filme;
-}
-// Retorna a lista de filmes em formato JSON
-echo json_encode(
+ }
+ echo json_encode(
  $filmes,
  JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
+ );
+ exit;
+}
+// Se um id foi informado, consulta somente esse filme
+$stmt = $conexao->prepare(
+ "SELECT * FROM filmes WHERE id = ?"
 );
